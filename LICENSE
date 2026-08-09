@@ -1,24 +1,201 @@
-This is free and unencumbered software released into the public domain.
+================================================================================
+                    4R022 SAAT — ÖZEL MÜLKİYET LİSANSI
+                    4R022 SAAT — PROPRIETARY LICENSE
+================================================================================
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+Telif Hakkı (c) 2026 Kaan Kross / 4R022. Tüm hakları saklıdır.
+Copyright (c) 2026 Kaan Kross / 4R022. All rights reserved.
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+Bu belge hem Türkçe hem İngilizce olarak sunulmuştur. Herhangi bir
+anlam farkı veya çelişki durumunda Türkçe metin esas alınır.
+This document is provided in both Turkish and English. In case of
+any discrepancy or conflict in meaning, the Turkish text prevails.
+
+================================================================================
+                              TÜRKÇE METİN
+================================================================================
+
+1. TANIMLAR
+
+"Yazılım", bu depoda (repository) yer alan 4R022 SAAT masaüstü
+uygulamasını, kaynak kodunu, derlenmiş (.exe/.pyw/ikili) dosyalarını,
+belgelerini, ikon ve görsellerini, ayar dosyalarını ve bunların
+türevlerini ifade eder. "4R022", bu Yazılımın ve markanın sahibi olan
+ticari markayı; "Kurucu" veya "Hak Sahibi", Kaan Kross'u ifade eder.
+
+2. MÜLKİYET
+
+Yazılım, Kaan Kross'a ait olan 4R022 markası altında geliştirilmiş
+olup Yazılım üzerindeki tüm fikri mülkiyet hakları (telif hakkı,
+marka, tasarım, kaynak kod ve tüm türevleri dahil ancak bunlarla
+sınırlı olmaksızın) münhasıran Kaan Kross'a aittir. Bu lisans,
+Yazılım üzerindeki mülkiyeti hiçbir şekilde devretmez.
+
+3. VERİLEN SINIRLI KULLANIM İZNİ
+
+İşbu lisans kapsamında, Yazılımı temin eden herkese, yalnızca
+aşağıdaki koşullara uyulması kaydıyla, Yazılımı kişisel veya dahili
+amaçlarla indirme, kurma ve çalıştırma konusunda münhasır olmayan,
+devredilemez, geri alınabilir (revocable) bir kullanım izni verilir.
+
+4. KESİNLİKLE YASAKLANAN EYLEMLER
+
+Aşağıdaki eylemler, Hak Sahibinin önceden yazılı açık izni olmaksızın
+KESİNLİKLE YASAKTIR:
+
+   a) Yazılımın kaynak kodunu veya derlenmiş halini tersine
+      mühendisliğe (reverse engineering) tabi tutmak, kaynak koda
+      dönüştürmeye (decompile) veya parçalarına ayırmaya
+      (disassemble) çalışmak;
+
+   b) Yazılımı, kodunu, ikonlarını, tasarımını veya herhangi bir
+      parçasını kopyalamak, çoğaltmak, değiştirmek, uyarlamak veya
+      bunlardan türev çalışmalar oluşturmak;
+
+   c) Yazılımı veya herhangi bir bölümünü, ücretli veya ücretsiz
+      olarak, herhangi bir üçüncü şahısla veya kamuyla paylaşmak,
+      dağıtmak, yeniden yayınlamak, alt lisanslamak, kiralamak,
+      satmak veya başka bir platforma (GitHub, uygulama marketleri,
+      dosya paylaşım siteleri vb. dahil) izinsiz yüklemek;
+
+   d) Yazılım üzerindeki 4R022 markasını, telif hakkı bildirimlerini,
+      lisans metnini veya Kurucu bilgisini kaldırmak, gizlemek ya da
+      değiştirmek;
+
+   e) Yazılımı, Hak Sahibinin itibarını zedeleyecek, yasa dışı
+      faaliyetlerde veya üçüncü şahısların haklarını ihlal edecek
+      şekilde kullanmak.
+
+5. FİKRİ MÜLKİYET
+
+Yazılımın tüm hakları, unvanı ve menfaati (tüm fikri mülkiyet hakları
+dahil) Kaan Kross'a aittir ve öyle kalmaya devam eder. Bu lisans,
+işbu belgede açıkça belirtilenler dışında hiçbir hak vermez.
+
+6. GARANTİ REDDİ
+
+YAZILIM "OLDUĞU GİBİ" SUNULMAKTADIR; AÇIK VEYA ZIMNİ HİÇBİR GARANTİ
+VERİLMEMEKTEDİR. HAK SAHİBİ, TİCARİ ELVERİŞLİLİK, BELİRLİ BİR AMACA
+UYGUNLUK VEYA İHLAL ETMEME DAHİL ANCAK BUNLARLA SINIRLI OLMAKSIZIN
+HER TÜRLÜ GARANTİYİ REDDEDER.
+
+7. SORUMLULUĞUN SINIRLANDIRILMASI
+
+HAK SAHİBİ, YAZILIMIN KULLANIMINDAN VEYA KULLANILAMAMASINDAN
+KAYNAKLANAN HİÇBİR DOĞRUDAN, DOLAYLI, ARIZİ VEYA SONUÇ NİTELİĞİNDEKİ
+ZARARDAN SORUMLU TUTULAMAZ.
+
+8. FESİH
+
+Bu lisans şartlarının ihlali halinde, Hak Sahibi tarafından verilen
+kullanım izni herhangi bir bildirime gerek kalmaksızın derhal sona
+erer. İzin sona erdiğinde, Yazılımın tüm kopyalarının imha edilmesi
+gerekir.
+
+9. UYGULANACAK HUKUK
+
+Bu lisans, Türkiye Cumhuriyeti kanunlarına tabidir ve bu kanunlara
+göre yorumlanır. Doğabilecek uyuşmazlıklarda Türkiye mahkemeleri
+yetkilidir.
+
+10. İLETİŞİM
+
+Bu lisansla ilgili izin talepleri veya sorular için Yazılımın resmi
+GitHub deposu üzerinden Hak Sahibiyle iletişime geçilebilir.
+
+================================================================================
+                              ENGLISH TEXT
+================================================================================
+
+1. DEFINITIONS
+
+"Software" refers to the 4R022 SAAT desktop application contained in
+this repository, including its source code, compiled files
+(.exe/.pyw/binary), documentation, icons and artwork, configuration
+files, and any derivatives thereof. "4R022" refers to the trademark
+and brand owning the Software. "Founder" or "Rights Holder" refers
+to Kaan Kross.
+
+2. OWNERSHIP
+
+The Software is developed under the 4R022 brand, which is owned by
+Kaan Kross. All intellectual property rights in and to the Software
+— including but not limited to copyright, trademark, design rights,
+source code, and all derivative works — are exclusively owned by
+Kaan Kross. This license does not transfer ownership of the Software
+in any way.
+
+3. LIMITED LICENSE GRANTED
+
+Subject to compliance with the terms below, anyone obtaining the
+Software is granted a non-exclusive, non-transferable, revocable
+license to download, install, and run the Software strictly for
+personal or internal use.
+
+4. STRICTLY PROHIBITED ACTIONS
+
+The following actions are STRICTLY PROHIBITED without the Rights
+Holder's prior explicit written permission:
+
+   a) Reverse engineering, decompiling, or disassembling the
+      Software's source code or compiled form;
+
+   b) Copying, reproducing, modifying, adapting, or creating
+      derivative works from the Software, its code, icons, design,
+      or any part thereof;
+
+   c) Sharing, distributing, republishing, sublicensing, renting,
+      selling, or uploading the Software or any part of it — whether
+      for payment or free of charge — to any third party or the
+      public, including uploading it to any other platform (GitHub,
+      app stores, file-sharing sites, etc.) without authorization;
+
+   d) Removing, obscuring, or altering the 4R022 trademark, copyright
+      notices, license text, or Founder attribution embedded in the
+      Software;
+
+   e) Using the Software in any way that damages the Rights Holder's
+      reputation, is unlawful, or infringes upon the rights of third
+      parties.
+
+5. INTELLECTUAL PROPERTY
+
+All right, title, and interest in and to the Software (including all
+intellectual property rights) remain with Kaan Kross. This license
+grants no rights other than those expressly stated herein.
+
+6. DISCLAIMER OF WARRANTY
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+EXPRESS OR IMPLIED. THE RIGHTS HOLDER DISCLAIMS ALL WARRANTIES,
+INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
 
-For more information, please refer to <https://unlicense.org>
+7. LIMITATION OF LIABILITY
+
+THE RIGHTS HOLDER SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING FROM THE USE OR
+INABILITY TO USE THE SOFTWARE.
+
+8. TERMINATION
+
+Any breach of this license immediately and automatically terminates
+the license granted, without notice. Upon termination, all copies of
+the Software must be destroyed.
+
+9. GOVERNING LAW
+
+This license is governed by and construed in accordance with the
+laws of the Republic of Turkey. Any disputes shall be subject to the
+exclusive jurisdiction of Turkish courts.
+
+10. CONTACT
+
+For permission requests or questions regarding this license, please
+contact the Rights Holder through the Software's official GitHub
+repository.
+
+================================================================================
+                    © 2026 Kaan Kross / 4R022 — Tüm hakları saklıdır.
+                    © 2026 Kaan Kross / 4R022 — All rights reserved.
+================================================================================

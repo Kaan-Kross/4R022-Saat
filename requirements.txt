@@ -1,0 +1,15 @@
+# 4R022 SAAT 2.0V - opsiyonel bagimliliklar
+# Uygulama bu paketler olmadan da calisir; sadece asagidaki
+# ozellikler devre disi kalir:
+#  - pystray + pillow  -> Arka planda calisma / sistem tepsisi
+#  - plyer             -> Isletim sistemi bildirimleri
+#
+# Not: PyInstaller ile .exe derlerken de bu dosya kullanilir,
+# boylece derlenen .exe tum ozellikleri iceren tam paket olur.
+#
+# Kurulum:
+#   pip install -r requirements.txt
+
+pystray>=0.19.5
+pillow>=10.0.0
+plyer>=2.1.0
