@@ -1,0 +1,37 @@
+# ============================================================
+#  4R022 SAAT - .gitignore
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# PyInstaller derleme ciktilari
+build/
+dist/
+*.spec.bak
+
+# Sanal ortamlar
+.venv/
+venv/
+env/
+
+# Kullanici ayar / log / veri dosyalari (kisisel, depoya girmemeli)
+.4r022_saat/
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Test ve gecici dosyalar
+test_*.png
+*_test.png
+debug_*.py
+shot_*.py
