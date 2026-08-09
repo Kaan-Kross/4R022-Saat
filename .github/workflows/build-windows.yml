@@ -1,0 +1,67 @@
+name: 4R022 SAAT - Windows EXE Derleme
+
+# Bu is akisi, GitHub'in kendi Windows sunucusunu (windows-latest runner)
+# kullanarak 4R022 Saat'i gercek bir Windows .exe dosyasina paketler.
+# Boylece gelistirici Windows makinesi olmadan da resmi, calisir bir
+# .exe ciktisi elde edilebilir.
+#
+# Calisma bicimleri:
+#   1) main/master dalina her push -> derler, "artifacts" olarak saklar
+#   2) "v" ile baslayan bir etiket (or. v2.0V) push edilince -> derler
+#      ve otomatik bir GitHub Release olusturup .exe'yi ekler
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Windows .exe derle
+    runs-on: windows-latest
+
+    steps:
+      - name: Depoyu indir
+        uses: actions/checkout@v4
+
+      - name: Python kurulumu
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bagimliliklari yukle
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          if (Test-Path requirements.txt) { pip install -r requirements.txt }
+
+      - name: PyInstaller ile .exe olustur
+        run: |
+          pyinstaller 4R022_Saat.spec --noconfirm
+
+      - name: Surum bilgisini oku
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(grep -m1 "^APP_VERSION" 4R022_Saat.py | sed -E 's/.*"([^"]+)".*/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Derleme ciktisini artifact olarak yukle
+        uses: actions/upload-artifact@v4
+        with:
+          name: 4R022_Saat-windows-${{ steps.version.outputs.version }}
+          path: dist/4R022_Saat.exe
+          if-no-files-found: error
+
+      - name: Etiketli surum icin GitHub Release olustur
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/4R022_Saat.exe
+          generate_release_notes: true
