@@ -151,18 +151,22 @@ python -m venv .venv
 # Linux / macOS:
 source .venv/bin/activate
 
-# İsteğe bağlı özellikler (sistem tepsisi + bildirimler) için:
+# İsteğe bağlı özellikler (sistem tepsisi + bildirimler + otomatik
+# yaz/kış saati tespiti) için — requirements.txt depo kök dizinindedir:
 pip install -r requirements.txt
 
-# Uygulamayı başlatın
+# Uygulama kaynağı Main/ klasöründedir; assets/ klasörünü otomatik
+# olarak bir üst dizinde (depo kökünde) bulur
+cd Main
 python 4R022_Saat.py
 ```
 
-> `requirements.txt` içindeki `pystray`, `pillow` ve `plyer`
+> `requirements.txt` içindeki `pystray`, `pillow`, `plyer` ve `tzdata`
 > kütüphaneleri **isteğe bağlıdır**. Kurulu değilse uygulama sorunsuz
-> çalışmaya devam eder; yalnızca "arka planda çalışma" ve "sistem
-> bildirimleri" özellikleri Ayarlar sayfasında otomatik olarak devre
-> dışı görünür.
+> çalışmaya devam eder; yalnızca "arka planda çalışma", "sistem
+> bildirimleri" ve "otomatik yaz/kış saati (DST) tespiti" özellikleri
+> Ayarlar sayfasında otomatik olarak devre dışı görünür (Bölgesel Saat
+> bu durumda sabit UTC farklarına düşer).
 
 ---
 
@@ -225,7 +229,7 @@ Kendi bilgisayarınızda derlemek isterseniz üç yöntem vardır:
 
 ### 1) Otomatik — GitHub Actions (önerilen)
 Bu depoyu fork'layıp `main` dalına push yaptığınızda veya `v` ile
-başlayan bir etiket (ör. `v2.0V`) oluşturduğunuzda, GitHub kendi
+başlayan bir etiket (ör. `v2.7.0V`) oluşturduğunuzda, GitHub kendi
 Windows sunucusunda otomatik olarak derleme yapar ve `.exe` dosyasını
 **Actions → Artifacts** bölümünde (etiketli sürümlerde ayrıca
 **Releases** bölümünde) sizin için hazırlar. Yerel bir Windows
@@ -233,20 +237,23 @@ makineye ihtiyacınız yoktur.
 
 ### 2) Yerel — Windows'ta `build.bat`
 ```
+cd Build
 build.bat
 ```
 dosyasına çift tıklamanız yeterlidir. Gerekli paketleri otomatik
-kurar ve `dist\4R022_Saat.exe` dosyasını oluşturur.
+kurar ve `Build\dist\4R022_Saat.exe` dosyasını oluşturur.
 
 ### 3) Yerel — Linux / macOS'ta `build.sh`
 ```bash
+cd Build
 chmod +x build.sh
 ./build.sh
 ```
 
-Her iki yöntem de aynı [`4R022_Saat.spec`](4R022_Saat.spec) dosyasını
-kullanır; bu dosya uygulamanın simgesini (`assets/icon.ico`) ve tüm
-kaynak dosyalarını otomatik olarak paketler.
+Her iki yöntem de aynı [`Build/4R022_Saat.spec`](Build/4R022_Saat.spec)
+dosyasını kullanır; bu dosya `Main/` klasöründeki uygulama kaynağını,
+simgesini (`assets/icon.ico`) ve tüm kaynak dosyalarını otomatik
+olarak paketler.
 
 ---
 
@@ -254,18 +261,25 @@ kaynak dosyalarını otomatik olarak paketler.
 
 ```
 4r022-saat/
-├── 4R022_Saat.py              # Ana uygulama (tek dosya)
-├── 4R022_Saat.spec            # PyInstaller derleme tanımı
-├── requirements.txt           # İsteğe bağlı bağımlılıklar
-├── build.bat / build.sh       # Yerel derleme betikleri
-├── LICENSE                    # Özel mülkiyet lisansı (TR/EN)
-├── CHANGELOG.md                # Sürüm geçmişi (v1.0 → v2.0V)
-├── README.md                  # Bu dosya
+├── Main/                        # Uygulama kaynağı
+│   └── 4R022_Saat.py            # Ana uygulama (tek dosya)
+├── assets/                      # Kaynaklar (Main/ ve Build/ ile kardeş klasör)
+│   ├── icon.ico / icon.png      # Pencere/görev çubuğu + sistem tepsisi simgesi (opak)
+│   ├── icon_transparent.png     # Kenar çubuğu simgesi (şeffaf, "4R022" yazısının yanında)
+│   ├── icon_full.png            # Tam marka görseli (açılış ekranı)
+│   └── screenshots/             # README ekran görüntüleri
+├── Build/                       # Derleme (PyInstaller) araçları ve çıktıları
+│   ├── 4R022_Saat.spec          # PyInstaller derleme tanımı
+│   ├── build.bat / build.sh     # Yerel derleme betikleri
+│   └── dist/ , work/            # Derleme çıktıları (git'e dahil değil)
 ├── .github/workflows/
-│   └── build-windows.yml      # Otomatik Windows .exe derleme (CI)
-└── assets/
-    ├── icon.ico / icon.png    # Uygulama logosu
-    └── screenshots/           # README ekran görüntüleri
+│   ├── build-windows.yml        # Otomatik Windows .exe derleme (CI)
+│   └── lint-and-smoke.yml       # Sözdizimi + Linux derleme + çalışma testi (CI)
+├── requirements.txt              # İsteğe bağlı bağımlılıklar
+├── LICENSE                       # Özel mülkiyet lisansı (TR/EN)
+├── CHANGELOG.md                  # Sürüm geçmişi (v1.0 → v2.7.0V)
+├── .gitignore
+└── README.md                     # Bu dosya
 ```
 
 ---
@@ -273,22 +287,26 @@ kaynak dosyalarını otomatik olarak paketler.
 ## ❓ Sık Sorulan Sorular
 
 **Uygulama internet bağlantısı gerektiriyor mu?**
-Hayır. Tüm saat hesaplamaları sabit UTC ofsetleriyle yerel olarak
-yapılır, herhangi bir sunucuya bağlanılmaz.
+Hayır. Tüm saat hesaplamaları yerel olarak yapılır, herhangi bir
+sunucuya bağlanılmaz.
 
 **Dünya saatleri yaz saati uygulamasını (DST) dikkate alıyor mu?**
-Hayır, sadelik ve harici bağımlılık gerektirmemek adına sabit UTC
-ofsetleri kullanılır. Bu, birkaç ülkede yaz saati dönemlerinde
-saatin 1 saat farklı görünmesine neden olabilir.
+Evet. `tzdata` paketi kuruluysa (hazır `.exe` sürümünde zaten
+dahildir) her ülkenin UTC farkı gerçek zaman dilimi kurallarına göre
+otomatik hesaplanır ve yaz/kış saati geçişlerinde kendiliğinden
+güncellenir. `tzdata` kurulu değilse (yalnızca kaynak koddan, bazı
+Windows Python kurulumlarında olabilir) sabit UTC farklarına
+düşülür.
 
 **"Arka Planda Çalışma" seçeneği neden gri (devre dışı) görünüyor?**
 Bu özellik `pystray` ve `pillow` kütüphanelerini gerektirir. Kaynak
-koddan çalıştırıyorsanız `pip install -r requirements.txt` komutunu
-çalıştırmanız yeterlidir. Hazır `.exe` sürümünde bu kütüphaneler
-zaten pakete dahildir.
+koddan çalıştırıyorsanız depo kök dizininde `pip install -r
+requirements.txt` komutunu çalıştırmanız yeterlidir. Hazır `.exe`
+sürümünde bu kütüphaneler zaten pakete dahildir.
 
 **Bildirimlerde uygulama adı yerine "Python" görünüyor.**
-Bu, yalnızca `python 4R022_Saat.py` komutuyla, paketlenmemiş halde
+Bu, yalnızca `python 4R022_Saat.py` komutuyla (Main/ klasöründen),
+paketlenmemiş halde
 çalıştırıldığında bazı işletim sistemlerinde ortaya çıkabilecek bir
 görünüm sorunudur — bildirim başlığı yine de her zaman "4R022 SAAT"
 ile başlar. Sorunu tamamen ortadan kaldırmak için hazır `.exe`
@@ -471,14 +489,17 @@ python -m venv .venv
 # Linux / macOS:
 source .venv/bin/activate
 
-# Install optional features (system tray + notifications):
+# Install optional features (system tray + notifications + automatic
+# daylight saving time detection) — requirements.txt lives at the repo root:
 pip install -r requirements.txt
 
-# Run the application
+# The application source lives in Main/; it finds assets/ automatically
+# one directory up (at the repo root)
+cd Main
 python 4R022_Saat.py
 ```
 
-> `pystray`, `pillow`, and `plyer` in `requirements.txt` are
+> `pystray`, `pillow`, `plyer`, and `tzdata` in `requirements.txt` are
 > **optional**. Without them the app runs perfectly fine — only the
 > "run in background" and "OS notifications" settings will appear
 > automatically disabled.
@@ -540,28 +561,30 @@ There are three ways to build it yourself:
 
 ### 1) Automatic — GitHub Actions (recommended)
 Fork this repo and push to `main`, or create a tag starting with `v`
-(e.g. `v2.0V`), and GitHub will automatically build the `.exe` on its
+(e.g. `v2.7.0V`), and GitHub will automatically build the `.exe` on its
 own Windows runner, making it available under **Actions → Artifacts**
 (and under **Releases** for tagged versions). No local Windows
 machine required.
 
 ### 2) Local — Windows `build.bat`
-Just double-click:
+Just double-click (from inside the `Build` folder):
 ```
+cd Build
 build.bat
 ```
 It installs the required packages automatically and produces
-`dist\4R022_Saat.exe`.
+`Build\dist\4R022_Saat.exe`.
 
 ### 3) Local — Linux / macOS `build.sh`
 ```bash
+cd Build
 chmod +x build.sh
 ./build.sh
 ```
 
-Both methods use the same [`4R022_Saat.spec`](4R022_Saat.spec) file,
-which automatically bundles the app icon (`assets/icon.ico`) and all
-resource files.
+Both methods use the same [`Build/4R022_Saat.spec`](Build/4R022_Saat.spec)
+file, which bundles the app source from `Main/`, the icon
+(`assets/icon.ico`), and all resource files automatically.
 
 ---
 
@@ -569,18 +592,25 @@ resource files.
 
 ```
 4r022-saat/
-├── 4R022_Saat.py              # Main application (single file)
-├── 4R022_Saat.spec            # PyInstaller build definition
-├── requirements.txt           # Optional dependencies
-├── build.bat / build.sh       # Local build scripts
-├── LICENSE                    # Proprietary license (TR/EN)
-├── CHANGELOG.md                # Version history (v1.0 → v2.0V)
-├── README.md                  # This file
+├── Main/                        # Application source
+│   └── 4R022_Saat.py            # Main application (single file)
+├── assets/                      # Resources (sibling of Main/ and Build/)
+│   ├── icon.ico / icon.png      # Window/taskbar + tray icon (opaque)
+│   ├── icon_transparent.png     # Sidebar icon (transparent, next to "4R022" text)
+│   ├── icon_full.png            # Full brand lockup (splash screen)
+│   └── screenshots/             # README screenshots
+├── Build/                       # Build (PyInstaller) tooling and output
+│   ├── 4R022_Saat.spec          # PyInstaller build definition
+│   ├── build.bat / build.sh     # Local build scripts
+│   └── dist/ , work/            # Build output (not committed to git)
 ├── .github/workflows/
-│   └── build-windows.yml      # Automatic Windows .exe build (CI)
-└── assets/
-    ├── icon.ico / icon.png    # Application logo
-    └── screenshots/           # README screenshots
+│   ├── build-windows.yml        # Automatic Windows .exe build (CI)
+│   └── lint-and-smoke.yml       # Syntax check + Linux build + run test (CI)
+├── requirements.txt              # Optional dependencies
+├── LICENSE                       # Proprietary license (TR/EN)
+├── CHANGELOG.md                  # Version history (v1.0 → v2.7.0V)
+├── .gitignore
+└── README.md                     # This file
 ```
 
 ---
@@ -588,24 +618,26 @@ resource files.
 ## ❓ FAQ
 
 **Does the app require an internet connection?**
-No. All time calculations are done locally using fixed UTC offsets;
-no server connection is made.
+No. All time calculations are done locally; no server connection is
+made.
 
 **Does the World Clock account for Daylight Saving Time (DST)?**
-No — for simplicity and to avoid external dependencies, fixed UTC
-offsets are used. This may cause a 1-hour discrepancy in some
-countries during DST periods.
+Yes. When the `tzdata` package is available (already bundled in the
+prebuilt `.exe`), each country's UTC offset is computed from real
+timezone rules and updates itself automatically across DST
+transitions. Without `tzdata` (source-only runs on some Windows
+Python installs), it falls back to fixed UTC offsets.
 
 **Why does "Run in Background" appear greyed out?**
 This feature requires the `pystray` and `pillow` libraries. If
-running from source, simply run `pip install -r requirements.txt`.
-The prebuilt `.exe` already includes these libraries.
+running from source, run `pip install -r requirements.txt` from the
+repo root. The prebuilt `.exe` already includes these libraries.
 
 **Notifications show "Python" instead of the app name.**
 This can happen on some systems only when running unpackaged via
-`python 4R022_Saat.py` — the notification's title text will still
-always start with "4R022 SAAT" regardless. Using the prebuilt `.exe`
-avoids this cosmetic issue entirely.
+`python 4R022_Saat.py` (from the `Main` folder) — the notification's
+title text will still always start with "4R022 SAAT" regardless.
+Using the prebuilt `.exe` avoids this cosmetic issue entirely.
 
 ---
 
